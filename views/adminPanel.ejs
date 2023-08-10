@@ -1,0 +1,248 @@
+<%- include('./layout/header') %>
+
+  <body class="bg-black">
+    <div class="container-fluid ">
+      <div class="d-flex justify-content-between align-items-center h4 p-2 ">
+        <!-- search panel -->
+        <% if(searchPanel !=='**' ) {%>
+          <form action="/admin/search" method="post" class="d-flex ">
+            <input type="text" name="search" placeholder="type the name"
+              class="form-control me-1 w-100 bg-dark-subtle " />
+            <button type="submit" class="btn btn-outline-success w-50">Search</button>
+          </form>
+          <%}%>
+            <form action="/admin/create" method="get" >
+              <button type="submit" name="create" class="btn btn-outline-warning  ">
+                Create
+              </button>
+            </form>
+            <form action="/admin/signout" method="post">
+              <button type="submit" class="btn btn-lg btn-outline-danger ">SignOut</button>
+            </form>
+      </div>
+      <!-- done------------------------------------------------------------------ -->
+
+      <!-- search result -->
+
+      <% if(search.length) {%>
+
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th class="text-info-emphasis">Id</th>
+              <th class="text-info-emphasis">Name</th>
+              <th class="text-info-emphasis">Email</th>
+              <th class="text-info-emphasis">UserName</th>
+              <th class="text-info-emphasis">PassWord</th>
+              <th class="text-info-emphasis">Status</th>
+              <th class="text-info-emphasis">Admin control</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% search.forEach((item)=>{%>
+              <tr>
+                <td>
+                  <%=item._id%>
+                </td>
+                <td>
+                  <%=item.name%>
+                </td>
+                <td>
+                  <%=item.email%>
+                </td>
+                <td>
+                  <%=item.username%>
+                </td>
+                <td>
+                  <%=item.password%>
+                </td>
+                <% if(item.isAdmin) {%>
+                  <td>Admin</td>
+                  <%} else{%>
+                    <td>User</td>
+                    <%}%>
+                      <td>
+
+                        <div class="d-flex ">
+                          <form action="/admin/edit" method="post" class="d-inline">
+                            <button type="submit" name="edit" value="<%=item._id%>"
+                              class="btn btn-outline-warning me-1 ">
+                              Edit
+                            </button>
+                          </form>
+                          <form action="/admin/delete" method="post" class="d-inline">
+                            <button type="submit" name="delete" value="<%=item._id%>"
+                              class="btn btn-outline-danger me-1">
+                              Delete
+                            </button>
+                          </form>
+
+
+
+                        </div>
+
+                      </td>
+              </tr>
+              <% })%>
+          </tbody>
+        </table>
+        <%}%>
+          <!-- done -->
+          <!-- users -->
+          <% if(searchPanel !=='**' ) {%>
+            <% if(user.length) {%>
+
+              <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th class="text-info-emphasis">Id</th>
+                    <th class="text-info-emphasis">Name</th>
+                    <th class="text-info-emphasis">Email</th>
+                    <th class="text-info-emphasis">UserName</th>
+                    <th class="text-info-emphasis">PassWord</th>
+                    <th class="text-info-emphasis">Status</th>
+                    <th class="text-info-emphasis text-center ">Admin control</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% user.forEach((item)=>{%>
+                    <tr>
+                      <td>
+                        <%=item._id%>
+                      </td>
+                      <td>
+                        <%=item.name%>
+                      </td>
+                      <td>
+                        <%=item.email%>
+                      </td>
+                      <td>
+                        <%=item.username%>
+                      </td>
+                      <td>
+                        <%=item.password%>
+                      </td>
+                      <% if(item.isAdmin) {%>
+                        <td>Admin</td>
+                        <%} else{%>
+                          <td>User</td>
+                          <%}%>
+                            <td>
+
+                              <div class="d-flex ">
+                                <form action="/admin/edit" method="post">
+                                  <button type="submit" name="edit" value="<%=item._id%>"
+                                    class="btn btn-outline-warning me-1 ">
+                                    Edit
+                                  </button>
+                                </form>
+                                <form action="/admin/delete" method="post">
+                                  <button type="submit" name="delete" value="<%=item._id%>"
+                                    class="btn btn-outline-danger me-1">
+                                    Delete
+                                  </button>
+                                </form>
+
+                              </div>
+
+                            </td>
+                    </tr>
+                    <% })%>
+                </tbody>
+              </table>
+              <%}%>
+                <%}%>
+
+                  <!-- done=--------------------------------------------------->
+                  <!-- edit -->
+                  <% if(edit) {%>
+                    <div class="d-flex flex-column justify-content-center text-center align-items-center  ">
+                      <div>
+                        <h1 class="pb-2  ">User Data</h1>
+                      </div>
+                      <div class="d-flex flex-row">
+                        <form action="/admin/saveEdit" method="post">
+                          <input type="text" name="id" placeholder=`<%=edit._id%>` value=<%=edit._id%>
+                            class="form-control
+                            mb-2 bg-secondary-subtle w-auto"/>
+                            <input type="text" name="name" placeholder=`<%=edit.name%>` value=<%=edit.name%>
+                              class="form-control
+                              mb-2 bg-secondary-subtle w-auto"/>
+                              <input type="text" name="email" placeholder=`<%=edit.email%>` value=<%=edit.email%>
+                                class="form-control
+                                mb-2 bg-secondary-subtle w-auto"/>
+                                <input type="text" name="username" placeholder=`<%=edit.username%>` value=
+                                <%=edit.username%>
+                                  class="form-control
+                                  mb-2 bg-secondary-subtle w-auto"/>
+                                  <input type="password" name="password" placeholder=`<%=edit.password%>`
+                                  value=<%=edit.password%>
+                                    class="form-control
+                                    mb-2 bg-secondary-subtle w-auto"/>
+                                    <input type="text" name="isAdmin" placeholder=`<%=edit.isAdmin%>` value=
+                                    <%=edit.isAdmin%> class="form-control
+                                      mb-2 bg-secondary-subtle w-auto"/>
+                                      <button type="submit" class="btn btn-outline-secondary w-50">Save</button>
+                        </form>
+                      </div>
+                    </div>
+                    <%}%>
+
+                      <!---- done ---->
+                      <!-- edit confirmation -->
+                      <% if(editUser) {%>
+                        <div class="d-flex flex-column  justify-content-center align-items-center vh-100  ">
+                          <h1 class="pb-2 text-warning">Confirm To Proceed To Edit</h1>
+                          <div class="d-flex">
+                            <a href="/admin/editUserConfirm" class="btn btn-outline-danger w-50 me-2 ">Confirm</a>
+                            <a href="/admin/adminPanel" class="btn btn-outline-success w-50">Cancell</a>
+                          </div>
+
+                        </div>
+                        <%}%>
+                          <!---- done ---->
+                          <!-- delete confirmation -->
+                          <% if(deleteUser) {%>
+                            <div class="d-flex flex-column  justify-content-center align-items-center vh-100  ">
+                              <h1 class="pb-2 text-warning">Confirm To Proceed Deletion</h1>
+                              <div class="d-flex">
+                                <a href="/admin/DeleteUserConfirm" class="btn btn-outline-danger w-50 me-2 ">Confirm</a>
+                                <a href="/admin/adminPanel" class="btn btn-outline-success w-50">Cancell</a>
+                              </div>
+                            </div>
+                            <%}%>
+
+                              <!-- create -->
+                              <% if (create) { %>
+                                <div class="container">
+                                  <div class="row">
+                                    <div class="col justify-content-center ">
+                                      <form action="/admin/create" method="post" class="w-25 m-auto ">
+                                        <% if (create==='Username Or Email Already Exist' ) { %>
+                                          <h5 class="text-danger ">
+                                            <%=create%>
+                                          </h5>
+                                          <% } %>
+                                            <h1 class="text-center text-light mb-4">Create Client</h1>
+                                            <input type="text" name="name" placeholder="Name" required
+                                              class="form-control mb-2 bg-secondary-subtle" />
+                                            <input type="text" name="email" placeholder="Email@gmail.com" required
+                                              class="form-control mb-2 bg-secondary-subtle" />
+                                            <input type="text" name="username" placeholder="Username" required
+                                              class="form-control mb-2 bg-secondary-subtle" />
+                                            <input type="password" name="password" placeholder="Password" required
+                                              class="form-control mb-2 bg-secondary-subtle" /><br>
+                                            <button type="submit"
+                                              class="btn btn-outline-secondary w-75 m-auto">Create</button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <% } %>
+
+    </div>
+
+
+
+    <%- include('./layout/footer')%>

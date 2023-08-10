@@ -1,0 +1,33 @@
+<%- include('./layout/header') %>
+
+  <body class=" bg-black  ">
+    <div class="container text-center">
+      <div class="row vh-100 justify-content-center align-items-center ">
+        <div class="col-6 col-md-5 col-lg-4 col-xl-3 ">
+
+          <form action="/login" method="post" class="text-start ">
+            <% if(message) {%>
+              <% if(message==='Invalid Username Or Password' ) {%>
+                <div class="text-danger">
+                  <%} else{%>
+                    <div class="text-success">
+                      <%}%>
+                        <%=message%>
+                    </div>
+                    <%}%>
+                      <h1 class="text-center text-light">Login</h1>
+                      <label for="username" class="form-label mb-1 text-light ">Username</label><br>
+                      <input type="text" name="username" placeholder="username" required id="username"
+                        class="form-control mb-2 bg-secondary-subtle" />
+                      <label for="password" class="form-label mb-1 text-light ">Password</label><br>
+                      <input type="password" name="password" placeholder="password" required id="password"
+                        class="form-control mb-4 bg-secondary-subtle " />
+                      <div class="w-75 m-auto ">
+                        <button type="submit" class="btn btn-outline-secondary w-50">Login</button>
+                        <a href="/user/userSingnUp" class="btn btn-outline-secondary w-auto   ">Sign Up</a>
+                      </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <%- include('./layout/footer')%>

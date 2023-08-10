@@ -1,0 +1,30 @@
+<%- include('./layout/header') %>
+
+  <body class="bg-black">
+    <div class="container">
+      <div class="row vh-100 justify-content-center align-items-center ">
+        <div class="col-6 col-md-5 col-lg-4 col-xl-3">
+
+          <form action="/user/userSingnUp" method="post"> <!--w-25 m-auto text-start -->
+            <% if(message) {%>
+              <div class="text-danger">
+                <%=message%>
+              </div>
+              <%}%>
+                <h1 class="text-center text-light mb-4">SignUp</h1>
+                <input type="text" name="name" placeholder="Name" required
+                  class="form-control mb-2 bg-secondary-subtle" />
+                <input type="text" name="email" placeholder="Email@gmail.com" required
+                  class="form-control mb-2 bg-secondary-subtle" />
+                <input type="text" name="username" placeholder="Username" required
+                  class="form-control mb-2 bg-secondary-subtle " />
+                <input type="password" name="password" placeholder="Password" required
+                  class="form-control mb-2 bg-secondary-subtle" /><br>
+                <button type="submit" class="btn btn-outline-secondary w-75 m-auto ">SignUp</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    <%- include('./layout/footer')%>

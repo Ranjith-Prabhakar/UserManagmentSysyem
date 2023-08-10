@@ -1,0 +1,19 @@
+<%- include('./layout/header') %>
+
+    <body class=" bg-black">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-end  align-items-center p-3 border-bottom border-dark-subtle ">
+                <form action="/user/signout" method="post">
+                    <button type="submit" class="btn btn-outline-danger  ">signOut</button>
+                </form>
+            </div>
+            <div class="row justify-content-center align-items-center vh-100 text-center ">
+                <div class="col">
+                    <h1 class="text-success">Hello '<%=userName%>' Happy To See You Again Hope You Enjoing Our Service
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+
+        <%- include('./layout/footer') %>
